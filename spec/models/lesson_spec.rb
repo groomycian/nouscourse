@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Lesson do
   let(:course) { FactoryGirl.create(:course) }
 
-  let (:lesson) { course.lesson.build(name: "new course", order: 1) }
+  let (:lesson) { course.lessons.build(name: "new course", order: 1) }
 
   subject { lesson }
 
@@ -32,7 +32,7 @@ describe Lesson do
   end
 
   describe "when lesson order is not integer" do
-    before { lesson.order = '12' }
+    before { lesson.order = 's121' }
     it { should_not be_valid }
   end
 

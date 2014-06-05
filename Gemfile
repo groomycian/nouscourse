@@ -46,10 +46,13 @@ group :test do
   gem 'libnotify', '~> 0.8.0'
 end
 
+<<<<<<< HEAD
 group :production do
   gem 'rails_12factor', '~> 0.0.2'
 end
 
+=======
+>>>>>>> feature/add-course-lessons-entities
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false

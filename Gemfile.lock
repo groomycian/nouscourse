@@ -229,10 +229,7 @@ DEPENDENCIES
   libnotify (~> 0.8.0)
   pg
   rails (= 4.0.0)
-<<<<<<< HEAD
   rails_12factor (~> 0.0.2)
-=======
->>>>>>> feature/add-course-lessons-entities
   rspec-rails (= 2.13.1)
   sass-rails (~> 4.0.0)
   sdoc

@@ -38,6 +38,8 @@ gem 'bootstrap-will_paginate', '~> 0.0.9'
 # populator with fake data
 gem 'faker', '~> 1.1.2'
 
+gem 'heroku_san'
+
 group :development do
   gem 'guard-rspec', '2.5.0'
   gem 'rspec-rails', '2.13.1'

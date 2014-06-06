@@ -1,2 +1,12 @@
-<h1>Index#index</h1>
-<p>Find me in app/views/index/index.html.erb</p>
+<% provide(:title, 'Добро пожаловать в nouscourse') %>
+<%= render 'index/parts/course_buttons' %>
+<%= will_paginate @lessons %>
+
+<div class="row">
+    <ul  class="lessons">
+      <%= render @lessons %>
+    </ul>
+</div>
+
+<%= will_paginate @lessons %>
+<%= render 'index/parts/course_buttons' %>

@@ -1,3 +1,5 @@
+ruby '2.0.0'
+
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -38,6 +40,8 @@ gem 'bootstrap-will_paginate', '~> 0.0.9'
 # populator with fake data
 gem 'faker', '~> 1.1.2'
 
+gem 'heroku_san'
+
 group :development do
   gem 'guard-rspec', '2.5.0'
   gem 'rspec-rails', '2.13.1'
@@ -55,7 +59,6 @@ group :test do
   gem 'database_cleaner', github: 'bmabey/database_cleaner'
   gem 'libnotify', '~> 0.8.0'
   #datapopulation
-  gem 'faker', '~> 1.1.2'
 end
 
 group :production do

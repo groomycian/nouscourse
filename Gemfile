@@ -55,7 +55,6 @@ group :test do
   gem 'database_cleaner', github: 'bmabey/database_cleaner'
   gem 'libnotify', '~> 0.8.0'
   #datapopulation
-  gem 'faker', '~> 1.1.2'
 end
 
 group :production do

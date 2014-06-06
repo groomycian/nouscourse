@@ -35,6 +35,9 @@ gem 'will_paginate', '~> 3.0.4'
 # bootstrap styles for simple paginator
 gem 'bootstrap-will_paginate', '~> 0.0.9'
 
+# populator with fake data
+gem 'faker', '~> 1.1.2'
+
 group :development do
   gem 'guard-rspec', '2.5.0'
   gem 'rspec-rails', '2.13.1'
@@ -42,7 +45,6 @@ group :development do
   gem 'guard-spork', '1.5.0'
   gem 'childprocess', '0.5.3'
   #datapopulation
-  gem 'faker', '~> 1.1.2'
 end
 
 group :test do

@@ -1,11 +1,15 @@
 <div class="row">
-  <% @courses.each do |course| %>
-      <%
-         button_type = 'default'
-         if !@current_course.nil? && @current_course.name == course.name
-           button_type = 'primary'
-         end
-      %>
-      <%= link_to course.name, course_name_url(course.name), class: "btn btn-large btn-" + button_type %>
-  <% end %>
+  <div class="text-center">
+      <div class="btn-group">
+        <% @courses.each do |course| %>
+            <%
+               button_type = 'default'
+               if !@current_course.nil? && @current_course.name == course.name
+                 button_type = 'primary'
+               end
+            %>
+            <%= link_to course.name, course_name_url(course.name), class: "btn btn-large btn-" + button_type %>
+        <% end %>
+      </div>
+   </div>
 </div>

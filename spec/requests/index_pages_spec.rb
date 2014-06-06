@@ -4,17 +4,24 @@ describe 'IndexPages' do
 	subject { page }
 
 	describe 'home page' do
+    let!(:courses) { [FactoryGirl.create(:course), FactoryGirl.create(:course), FactoryGirl.create(:course)] }
+    let(:first_course) { Course.order('name ASC').first }
+
     before { visit root_path }
 
     it { should have_title(full_title('Добро пожаловать в nouscourse')) }
 
     describe 'course buttons' do
-      let(:courses) { [FactoryGirl.create(:course), FactoryGirl.create(:course), FactoryGirl.create(:course)] }
+      before { visit root_path }
+
+
+      it "should have courses" do
+        expect(Course.count).not_to eql(0)
+      end
 
       it 'should have course buttons' do
-        courses.each do |course, i|
-          should have_selector("a[href='" + course_name_url(course.name) + "'].btn.btn-" +
-                                   (i == 0 ? 'default' : 'primary'), text:course.name)
+        Course.order('name ASC').each do |course, i|
+          should have_selector('a.btn-' + (first_course.id == course.id ? 'primary' : 'default'), text:course.name)
         end
       end
 

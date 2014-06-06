@@ -22,17 +22,19 @@ RSpec::Matchers.define :have_success_message do |message|
 end
 
 shared_examples_for "switch_to_primary_button" do
-  before { click_button course.name }
+  before { first(:link, course.name).click }
 
-  it { expect(page).should have_selector("a[href='" + course_name_url(click_button course.name) + "'].btn.btn-primary",
-                                        text:course.name) }
+  it { should have_selector("a.btn.btn-primary", text:course.name) }
 end
 
 shared_examples_for 'check_course_pagination' do
-  before do
-    30.times { FactoryGirl.create(:lesson, course: course) }
+  let(:another_course) { FactoryGirl.create(:course) }
 
-    click_button course.name
+  before do
+    60.times { |i| FactoryGirl.create(:lesson, course: course, order: i) }
+    60.times { |i| FactoryGirl.create(:lesson, course: another_course, order: i) }
+
+    first(:link, course.name).click
   end
 
   after { course.lessons.delete_all }

@@ -1,6 +1,6 @@
 Nouscourse::Application.routes.draw do
   root to: 'index#index'
-  match 'course/:course_name', to: 'index#index', as: :course_name, via: [:get]
+  match 'course/:course_name', to: 'index#index', as: :course_name, :constraints => { :course_name => /[^\/]+/ },  via: [:get]
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

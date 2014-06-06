@@ -1,2 +1,12 @@
 <% provide(:title, 'Добро пожаловать в nouscourse') %>
-<h1>Nouscourse</h1>
+<%= render 'index/parts/course_buttons' %>
+<%= will_paginate @lessons %>
+
+<div class="row">
+    <ul  class="lessons">
+      <%= render @lessons %>
+    </ul>
+</div>
+
+<%= will_paginate @lessons %>
+<%= render 'index/parts/course_buttons' %>

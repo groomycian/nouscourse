@@ -4,11 +4,11 @@
 
 page_ready = ->
   $('#spinner').show()
-  $('#body').css({opacity: 0.5, pointerEvents: 'none'})
+  $('.container').css({opacity: 0.5, pointerEvents: 'none'})
 
 page_load = ->
   $('#spinner').hide()
-  $('#body').css({opacity: 1, pointerEvents: 'yes'})
+  $('.container').css({opacity: 1, pointerEvents: 'yes'})
 
 $(document).ready(page_load);
 $(document).on('page:load', page_load);

@@ -24,6 +24,7 @@ end
 shared_examples_for "switch_to_primary_button" do
   before { first(:link, course.name).click }
 
+  it { should have_title(full_title('Текущий курс ' + course.name)) }
   it { should have_selector("a.btn.btn-primary", text:course.name) }
 end
 

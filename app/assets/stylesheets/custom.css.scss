@@ -228,8 +228,8 @@ section:last-child {
   bottom: 0;
   right: 0;
   left: 0;
-  border-top: solid 20px #ff3c50;
-  border-bottom: solid 20px #ff3c50;
+  border-top: solid 20px #222;
+  border-bottom: solid 20px #222;
   border-left: solid 20px transparent;
   border-right: solid 20px transparent;
   content: "";
@@ -254,7 +254,7 @@ section:last-child {
   margin: auto;
   width: 40px;
   height: 40px;
-  background-color: #28aadc;
+  background-color: #000;
   content: "";
   -webkit-border-radius: 20px;
   -moz-border-radius: 20px;
@@ -312,3 +312,5 @@ section:last-child {
     transform: rotate(360deg);
   }
 }
+
+//spinner

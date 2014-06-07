@@ -9,7 +9,7 @@ describe 'IndexPages' do
 
     before { visit root_path }
 
-    it { should have_title(full_title('Добро пожаловать в nouscourse')) }
+    it { should have_title(full_title('Текущий курс ' + first_course.name)) }
 
     describe 'course buttons' do
       before { visit root_path }

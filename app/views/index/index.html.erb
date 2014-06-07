@@ -1,4 +1,4 @@
-<% provide(:title, 'Добро пожаловать в nouscourse') %>
+<% provide(:title, 'Текущий курс ' + @current_course.name) %>
 <%= render 'index/parts/course_buttons' %>
 <%= will_paginate @lessons %>
 

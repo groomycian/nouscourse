@@ -32,8 +32,8 @@ shared_examples_for 'check_course_pagination' do
   let(:another_course) { FactoryGirl.create(:course) }
 
   before do
-    60.times { |i| FactoryGirl.create(:lesson, course: course, order: i) }
-    60.times { |i| FactoryGirl.create(:lesson, course: another_course, order: i) }
+    60.times { |i| FactoryGirl.create(:lesson, course: course) }
+    60.times { |i| FactoryGirl.create(:lesson, course: another_course) }
 
     first(:link, course.name).click
   end

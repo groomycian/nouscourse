@@ -19,7 +19,6 @@ def make_lessons
 		courses.each do |course|
       name = Faker::Lorem.sentence(1, true)
       description = Faker::Lorem.sentence(5)
-      order = i
 
       course.lessons.create!(name: name, description: description, order: order)
     end

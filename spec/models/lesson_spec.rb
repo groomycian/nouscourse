@@ -3,12 +3,11 @@ require 'spec_helper'
 describe Lesson do
   let(:course) { FactoryGirl.create(:course) }
 
-  let (:lesson) { course.lessons.build(name: "new course", order: 1) }
+  let (:lesson) { course.lessons.build(name: "new course") }
 
   subject { lesson }
 
   it { should respond_to(:name) }
-  it { should respond_to(:order) }
   it { should respond_to(:description) }
   it { should respond_to(:course) }
 
@@ -23,16 +22,6 @@ describe Lesson do
 
   describe "when lesson name is too long" do
     before { lesson.name = 'j' * 257 }
-    it { should_not be_valid }
-  end
-
-  describe "when lesson order is empty" do
-    before { lesson.order = nil }
-    it { should_not be_valid }
-  end
-
-  describe "when lesson order is not integer" do
-    before { lesson.order = 's121' }
     it { should_not be_valid }
   end
 

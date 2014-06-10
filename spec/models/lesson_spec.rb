@@ -10,6 +10,7 @@ describe Lesson do
   it { should respond_to(:name) }
   it { should respond_to(:description) }
   it { should respond_to(:course) }
+  it { should respond_to(:timetables) }
 
   its(:course) { should eq course }
 

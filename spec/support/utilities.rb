@@ -28,6 +28,36 @@ shared_examples_for "switch_to_primary_button" do
   it { should have_selector("a.btn.btn-primary", text:course.name) }
 end
 
+shared_examples_for 'check_all_lessons_pagination' do |pagination_page|
+  let(:first_course) { FactoryGirl.create(:course) }
+  let(:second_course) { FactoryGirl.create(:course) }
+  let(:third_course) { FactoryGirl.create(:course) }
+
+  before do
+    30.times { |i| FactoryGirl.create(:lesson, course: first_course, order: i) }
+    30.times { |i| FactoryGirl.create(:lesson, course: second_course, order: i) }
+    30.times { |i| FactoryGirl.create(:lesson, course: third_course, order: i) }
+
+    visit root_path
+
+    first('div.pagination').click_link(pagination_page)
+  end
+
+  after do
+    first_course.lessons.delete_all
+    second_course.lessons.delete_all
+    third_course.lessons.delete_all
+  end
+
+  it { should have_selector('div.pagination') }
+
+  it "should list each lesson" do
+    Lesson.paginate(page: pagination_page).each do |lesson|
+      expect(page).to have_selector('li', text: lesson.name)
+    end
+  end
+end
+
 shared_examples_for 'check_course_pagination' do
   let(:another_course) { FactoryGirl.create(:course) }
 
@@ -38,7 +68,7 @@ shared_examples_for 'check_course_pagination' do
     first(:link, course.name).click
   end
 
-  after { course.lessons.delete_all }
+  after { Lesson.delete_all }
 
   it { should have_selector('div.pagination') }
 

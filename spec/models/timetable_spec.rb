@@ -48,7 +48,7 @@ describe Timetable do
     end
 
     it "should have items" do
-      Timetable.comming.count.should_not eq 0
+      Timetable.comming(nil).count.should_not eq 0
     end
 
     describe "comming/old" do
@@ -56,11 +56,25 @@ describe Timetable do
                              FactoryGirl.create(:timetable, lesson: lessons[0], date: Date.today - 1)]}
 
       it "gets only comming" do
-        Timetable.comming.should_not include *old_timetables
+        Timetable.comming(nil).should_not include *old_timetables
       end
 
       it "gets old too" do
         Timetable.all.should include *old_timetables
+      end
+
+      describe 'order' do
+        it 'should be ordered by date' do
+          date = nil
+          Timetable.comming(nil).each do |timetable|
+            if date.nil?
+              date = timetable.date
+            end
+
+            timetable.date.should >= date
+            date = timetable.date
+          end
+        end
       end
     end
   end

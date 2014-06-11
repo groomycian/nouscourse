@@ -1,13 +1,13 @@
 <% provide(:title, (!@current_course.nil?) ? 'Текущий курс ' + @current_course.name : '') %>
 <%= render 'index/parts/course_buttons' %>
-<%= will_paginate @lessons %>
+<%= will_paginate @timetables %>
 
 <div class="row">
     <h1 class="lessons">Уроки</h1>
     <ul  class="lessons">
-      <%= render @lessons %>
+      <%= render 'lessons/parts/timetables',  timetables: @timetables %>
     </ul>
 </div>
 
-<%= will_paginate @lessons %>
+<%= will_paginate @timetables %>
 <%= render 'index/parts/course_buttons' %>

@@ -15,6 +15,8 @@ describe 'IndexPages' do
     it_should_behave_like 'check_all_lessons_pagination', 2
     it_should_behave_like 'check_all_lessons_pagination', 3
 
+    it_should_behave_like 'check_lesson_comming_feed'
+
     describe 'course buttons' do
       before { visit root_path }
 

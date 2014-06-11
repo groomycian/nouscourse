@@ -4,5 +4,11 @@ class Timetable < ActiveRecord::Base
   validates :lesson_id, presence: true, :numericality => {:only_integer => true}
   validates :date, presence: true
 
-  scope :comming, -> { where('"date" >= ?', Date.today) }
+  scope :comming, -> (course) do
+    composed_scope = self.all
+    composed_scope = composed_scope.includes(:lesson).where('"date" >= ?', Date.today).order('date ASC')
+    composed_scope = composed_scope.where('lessons.course_id = ?', course).references(:lesson) unless course.nil?
+
+    composed_scope
+  end
 end

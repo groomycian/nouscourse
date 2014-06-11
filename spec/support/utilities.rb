@@ -34,9 +34,13 @@ shared_examples_for 'check_all_lessons_pagination' do |pagination_page|
   let(:third_course) { FactoryGirl.create(:course) }
 
   before do
-    30.times { |i| FactoryGirl.create(:lesson, course: first_course, order: i) }
-    30.times { |i| FactoryGirl.create(:lesson, course: second_course, order: i) }
-    30.times { |i| FactoryGirl.create(:lesson, course: third_course, order: i) }
+    30.times { |i| FactoryGirl.create(:lesson, course: first_course) }
+    30.times { |i| FactoryGirl.create(:lesson, course: second_course) }
+    30.times { |i| FactoryGirl.create(:lesson, course: third_course) }
+
+    Lesson.all.each do |lesson|
+      5.times {|i| FactoryGirl.create(:timetable, lesson: lesson) }
+    end
 
     visit root_path
 
@@ -52,9 +56,35 @@ shared_examples_for 'check_all_lessons_pagination' do |pagination_page|
   it { should have_selector('div.pagination') }
 
   it "should list each lesson" do
-    Lesson.paginate(page: pagination_page).each do |lesson|
-      expect(page).to have_selector('li', text: lesson.name)
+    Timetable.comming(nil).paginate(page: pagination_page).each do |timetable|
+      expect(page).to have_selector('li', text: timetable.lesson.name)
+      expect(page).to have_selector('li span', text: timetable.date)
     end
+  end
+end
+
+shared_examples_for 'check_lesson_comming_feed' do
+  let(:first_course) { FactoryGirl.create(:course) }
+  let(:first_lesson) { FactoryGirl.create(:lesson, course: first_course) }
+  let(:second_lesson) { FactoryGirl.create(:lesson, course: first_course) }
+  let(:third_lesson) { FactoryGirl.create(:lesson, course: first_course) }
+
+  before do
+    #old
+    FactoryGirl.create(:timetable, lesson: first_lesson, date: Date.today - 2)
+    #old
+    FactoryGirl.create(:timetable, lesson: second_lesson, date: Date.today - 1)
+    #comming
+    FactoryGirl.create(:timetable, lesson: third_lesson, date: Date.today)
+
+
+    visit root_path
+  end
+
+  it 'should show only comming lessons' do
+    expect(page).not_to have_selector('li', text: first_lesson.name)
+    expect(page).not_to have_selector('li', text: second_lesson.name)
+    expect(page).to have_selector('li', text: third_lesson.name)
   end
 end
 
@@ -62,8 +92,12 @@ shared_examples_for 'check_course_pagination' do
   let(:another_course) { FactoryGirl.create(:course) }
 
   before do
-    60.times { |i| FactoryGirl.create(:lesson, course: course, order: i) }
-    60.times { |i| FactoryGirl.create(:lesson, course: another_course, order: i) }
+    60.times { |i| FactoryGirl.create(:lesson, course: course) }
+    60.times { |i| FactoryGirl.create(:lesson, course: another_course) }
+
+    Lesson.all.each do |lesson|
+      5.times {|i| FactoryGirl.create(:timetable, lesson: lesson) }
+    end
 
     first(:link, course.name).click
   end
@@ -73,8 +107,10 @@ shared_examples_for 'check_course_pagination' do
   it { should have_selector('div.pagination') }
 
   it "should list each lesson" do
-    course.lessons.paginate(page: 1).each do |lesson|
-      expect(page).to have_selector('li', text: lesson.name)
+    Timetable.comming(course).paginate(page: 1).each do |timetable|
+      expect(timetable.lesson.course_id).to eql course.id
+      expect(page).to have_selector('li', text: timetable.lesson.name)
+      expect(page).to have_selector('li span', text: timetable.date)
     end
   end
 end

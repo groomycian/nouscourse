@@ -31,15 +31,11 @@ describe Course do
     before { course.save() }
 
     let!(:second_lesson) do
-      FactoryGirl.create(:lesson, course: course, order: 2)
+      FactoryGirl.create(:lesson, course: course)
     end
 
     let!(:first_lesson) do
-      FactoryGirl.create(:lesson, course: course, order: 1)
-    end
-
-    it 'lessons should have right order' do
-      expect(course.lessons.to_a).to eq [first_lesson, second_lesson]
+      FactoryGirl.create(:lesson, course: course)
     end
   end
 end

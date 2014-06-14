@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140610124215) do
+ActiveRecord::Schema.define(version: 20140614110021) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,5 +42,18 @@ ActiveRecord::Schema.define(version: 20140610124215) do
   end
 
   add_index "timetables", ["lesson_id", "date"], name: "index_timetables_on_lesson_id_and_date", using: :btree
+
+  create_table "users", force: true do |t|
+    t.string   "name",                            null: false
+    t.string   "email",                           null: false
+    t.boolean  "admin",           default: false, null: false
+    t.string   "password_digest",                 null: false
+    t.string   "remember_token"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["remember_token"], name: "index_users_on_remember_token", using: :btree
 
 end

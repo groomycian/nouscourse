@@ -4,14 +4,23 @@ namespace :db do
 		make_courses
 		make_lessons
     make_timetables
+    make_users
 	end
 end
 
 def make_courses
 	4.times do |n|
     name = Faker::Lorem.word
-    Course.create!(name: name)
+    Course.create!(name: name + "#{n}")
 	end
+end
+
+def make_users
+  admin = User.create!(name:     "Example User",
+                       email:    "example@user.org",
+                       password: "qwerty",
+                       password_confirmation: "qwerty",
+                       admin: true)
 end
 
 def make_lessons

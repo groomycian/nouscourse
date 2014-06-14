@@ -6,7 +6,6 @@ module AuthenticationHelpers
 			cookies[:remember_token] = remember_token
 			user.update_attribute(:remember_token, User.digest(remember_token))
 		else
-			user.update_attribute(:confirmation_hash, nil) if !options[:not_confirmed]
 			visit signin_path
 			fill_in "Email",    with: user.email
 			fill_in "Password", with: user.password
@@ -23,7 +22,6 @@ module AuthenticationHelpers
 
 	shared_examples_for "success sign in" do
 		it { should have_title(user.name) }
-		it { should have_link('Users', href: users_path) }
 		it { should have_link('Profile', href: user_path(user)) }
 		it { should have_link('Settings', href: edit_user_path(user)) }
 		it { should have_link('Sign out', href: signout_path) }

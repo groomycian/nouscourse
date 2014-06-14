@@ -1,6 +1,13 @@
 Nouscourse::Application.routes.draw do
   root to: 'index#index'
+
+  match '/signin',		to: 'sessions#new',         	via: 'get'
+  match '/signout',		to: 'sessions#destroy',     	via: 'delete'
+
   match 'course/:course_name', to: 'index#index', as: :course_name, :constraints => { :course_name => /[^\/]+/ },  via: [:get]
+
+  resources :users
+  resources :sessions, only: [:new, :create, :destroy]
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

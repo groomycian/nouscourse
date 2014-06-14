@@ -205,15 +205,15 @@ aside {
 
 //spinner
 
-section {
+section#spinner {
   position: fixed;
   left: 50%;
   top: 50%;
   width: 170px;
   height: 120px;
-}
-section:last-child {
-  margin-bottom: 0;
+  &:last-child {
+    margin-bottom: 0;
+  }
 }
 
 .spinner {
@@ -324,3 +324,14 @@ section:last-child {
 }
 
 //spinner
+
+//user details
+
+.gravatar {
+  float: left;
+  margin-right: 10px;
+}
+
+div.gravatar-edit {
+  margin-top: 15px;
+}

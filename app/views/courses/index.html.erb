@@ -1,10 +1,17 @@
 <% provide(:title, 'Все курсы') %>
 <h1>Все курсы</h1>
 
-<%= will_paginate %>
+<div class="row">
+    <div class="pull-left">
+        <%= link_to "Добавить курс", new_course_path %>
+    </div>
+</div>
+<div class="row">
+    <%= will_paginate %>
 
-<ul class="list-items">
-	<%= render @courses %>
-</ul>
+    <ul class="list-items">
+        <%= render @courses %>
+    </ul>
 
-<%= will_paginate %>
+    <%= will_paginate %>
+</div>

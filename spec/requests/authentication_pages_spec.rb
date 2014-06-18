@@ -10,6 +10,7 @@ describe "AuthenticationPages" do
 		it { should have_content("Sign in") }
 		it { should have_title("Sign in") }
 		it { should have_link("Sign in") }
+		it { should_not have_link("Админ") }
 
 		describe 'with invalid information' do
 			before { click_button "Sign in" }
@@ -36,6 +37,13 @@ describe "AuthenticationPages" do
 				it { should have_link('Sign in') }
 			end
 		end
+
+    describe "with valid admin information" do
+      let(:user) { FactoryGirl.create(:admin) }
+      before { valid_sign_in(user) }
+
+      it_should_behave_like "success sign in"
+    end
 
 		describe "for non signed in users" do
 			let(:user) { FactoryGirl.create(:user) }

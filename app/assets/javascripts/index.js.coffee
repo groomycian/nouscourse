@@ -12,4 +12,5 @@ page_load = ->
 
 $(document).ready(page_load);
 $(document).on('page:load', page_load);
+$(document).on('page:restore', page_load);
 $(document).on('page:fetch', page_ready);

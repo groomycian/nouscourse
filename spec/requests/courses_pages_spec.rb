@@ -22,6 +22,7 @@ describe "Courses pages" do
 
       it { should have_title('Все курсы') }
       it { should have_content('Все курсы') }
+      it { should have_link('Добавить курс') }
 
       describe "pagination" do
 

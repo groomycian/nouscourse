@@ -22,9 +22,19 @@ module AuthenticationHelpers
 
 	shared_examples_for "success sign in" do
 		it { should have_title(user.name) }
-		it { should have_link('Profile', href: user_path(user)) }
-		it { should have_link('Settings', href: edit_user_path(user)) }
-		it { should have_link('Sign out', href: signout_path) }
+		it do
+      should have_link('Profile', href: user_path(user))
+      should have_link('Settings', href: edit_user_path(user))
+      should have_link('Sign out', href: signout_path)
+      should_not have_link('Sign in', href: signin_path)
+
+      if user.admin?
+        should have_link('Админ', href: '#')
+        should have_link('Курсы', href: courses_path)
+        should have_link('Пользователи', href: '#')
+      end
+    end
+
 		it { should_not have_link('Sign in', href: signin_path) }
   end
 

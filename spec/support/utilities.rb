@@ -9,6 +9,10 @@ def full_title(page_title)
   end
 end
 
+def fill_course_with_valid_info(course)
+  fill_in "Name", with: course.name
+end
+
 RSpec::Matchers.define :have_error_message do |message|
   match do |page|
     expect(page).to have_selector('div.alert.alert-danger', text: message)

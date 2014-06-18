@@ -1,0 +1,10 @@
+<% provide(:title, 'Все курсы') %>
+<h1>Все курсы</h1>
+
+<%= will_paginate %>
+
+<ul class="list-items">
+	<%= render @courses %>
+</ul>
+
+<%= will_paginate %>

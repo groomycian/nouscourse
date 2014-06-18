@@ -16,6 +16,12 @@ def make_courses
 end
 
 def make_users
+  user = User.create!(name:     "Example User",
+                       email:    "exampl1e@user.org",
+                       password: "qwerty",
+                       password_confirmation: "qwerty",
+                       admin: false)
+
   admin = User.create!(name:     "Example User",
                        email:    "example@user.org",
                        password: "qwerty",

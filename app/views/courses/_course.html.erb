@@ -1,0 +1,11 @@
+<li>
+    <%= course.name %>
+    <div class="btn-group pull-right">
+      <%= link_to edit_course_path(course), class: 'btn btn-default btn-sm' do %>
+        <i class="glyphicon glyphicon-edit"></i>
+      <% end %>
+      <%= link_to course, method: :delete, class: 'btn btn-default btn-sm', data: { confirm: "You sure?" } do %>
+        <i class="glyphicon glyphicon-trash"></i>
+      <% end %>
+    </div>
+</li>

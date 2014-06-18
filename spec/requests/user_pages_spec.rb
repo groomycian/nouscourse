@@ -8,7 +8,7 @@ describe "User Pages" do
 	subject { page }
 
 	describe "edit" do
-		let(:user) { FactoryGirl.create(:user) }
+		let(:user) { FactoryGirl.create(:admin) }
 		before do
 			valid_sign_in(user)
 			visit edit_user_path(user)
@@ -24,7 +24,7 @@ describe "User Pages" do
 		describe "with invalid information" do
 			before { click_button "Save changes" }
 
-			it { should have_content('error') }
+			it { should have_content('ошибк') }
 		end
 
 		describe "with valid information" do
@@ -50,7 +50,7 @@ describe "User Pages" do
 		describe "forbidden attributes" do
 			let(:params) do {
 				user: {
-					admin: true,
+					admin: false,
 					password: user.password,
 					password_confirmation: user.password
 				}
@@ -62,7 +62,7 @@ describe "User Pages" do
 				patch user_path(user), params
 			end
 
-			specify { expect(user.reload).not_to be_admin }
+			specify { expect(user.reload).to be_admin }
 		end
 	end
 end

@@ -26,5 +26,30 @@ module AuthenticationHelpers
 		it { should have_link('Settings', href: edit_user_path(user)) }
 		it { should have_link('Sign out', href: signout_path) }
 		it { should_not have_link('Sign in', href: signin_path) }
-	end
+  end
+
+  shared_examples_for 'check_access_to_page' do |success_page_title|
+    describe "visiting for not auth user" do
+      before { visit target_path }
+      it { should have_title('Sign in') }
+    end
+
+    describe "visiting for not admin user" do
+      before do
+        valid_sign_in user, no_capybara: true
+        get target_path
+      end
+
+      specify { expect(response).to redirect_to(root_path) }
+    end
+
+    describe "visiting for admin user" do
+      before do
+        valid_sign_in admin
+        visit target_path
+      end
+
+      it { should have_title(success_page_title) }
+    end
+  end
 end

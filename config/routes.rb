@@ -7,7 +7,11 @@ Nouscourse::Application.routes.draw do
   match 'course/:course_name', to: 'index#index', as: :course_name, :constraints => { :course_name => /[^\/]+/ },  via: [:get]
 
   resources :users
-  resources :courses
+  resources :courses, only: [:index, :new, :edit, :update, :create, :destroy]
+  resources :courses do
+    resources :lessons, only: [:index, :new, :edit, :update, :create, :destroy]
+  end
+
   resources :sessions, only: [:new, :create, :destroy]
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

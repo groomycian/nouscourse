@@ -6,9 +6,6 @@ class CoursesController < ApplicationController
     @courses = Course.paginate(page: params[:page])
   end
 
-  def show
-  end
-
   def new
     @course = Course.new
   end

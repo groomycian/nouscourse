@@ -1,0 +1,16 @@
+<% provide(:title, 'Список уроков для курса ' + @course.name) %>
+<h1>Список уроков для курса <%=@course.name%></h1>
+<div class="row">
+  <div class="pull-left">
+    <%= link_to "Добавить урок", new_course_lesson_path(@course) %>
+  </div>
+</div>
+<div class="row">
+  <%= will_paginate %>
+
+  <ul class="list-items">
+    <%= render @lessons, should_show_admin_panel: true %>
+  </ul>
+
+  <%= will_paginate %>
+</div>

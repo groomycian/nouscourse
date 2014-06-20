@@ -5,10 +5,10 @@
     <%end%>
     <% if (signed_in? && current_user.admin && defined?(should_show_admin_panel) && should_show_admin_panel ) %>
       <div class="btn-group pull-right">
-        <%= link_to edit_course_lesson_path(lesson.course, lesson), class: 'btn btn-default btn-sm' do %>
+        <%= link_to edit_course_lesson_path(lesson.course, lesson), :title => 'Редактировать урок', class: 'btn btn-default btn-sm' do %>
             <i class="glyphicon glyphicon-edit"></i>
         <% end %>
-        <%= link_to course_lesson_path(lesson.course, lesson), method: :delete, class: 'btn btn-default btn-sm', data: { confirm: "You sure?" } do %>
+        <%= link_to course_lesson_path(lesson.course, lesson), :title => 'Удалить урок', method: :delete, class: 'btn btn-default btn-sm', data: { confirm: "You sure?" } do %>
             <i class="glyphicon glyphicon-trash"></i>
         <% end %>
       </div>

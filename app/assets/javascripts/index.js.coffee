@@ -7,6 +7,7 @@ page_ready = ->
   $('.container').css({opacity: 0.5, pointerEvents: 'none'})
 
 page_load = ->
+  $('#body [title]').tooltip({});
   $('#spinner').hide()
   $('.container').css({opacity: 1, pointerEvents: 'yes'})
 

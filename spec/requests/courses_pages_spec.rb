@@ -22,7 +22,7 @@ describe "Courses pages" do
 
       it { should have_title('Все курсы') }
       it { should have_content('Все курсы') }
-      it { should have_link('Добавить курс') }
+      it { should have_link('Добавить курс', href: new_course_path) }
 
       describe "pagination" do
 
@@ -36,6 +36,7 @@ describe "Courses pages" do
             expect(page).to have_selector('li', text: course.name)
             should have_link('', href: edit_course_path(course))
             should have_link('', href: course_path(course))
+            should have_link('', href: course_lessons_path(course))
           end
         end
       end
@@ -57,7 +58,7 @@ describe "Courses pages" do
       it { should have_content('Новый курс') }
       it { should have_button('Создать новый курс') }
 
-      describe 'create new user' do
+      describe 'create new course' do
         let(:submit) { "Создать новый курс" }
 
         describe 'with wrong info' do

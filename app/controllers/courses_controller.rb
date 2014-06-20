@@ -4,6 +4,8 @@ class CoursesController < ApplicationController
 
   def index
     @courses = Course.paginate(page: params[:page])
+
+    self.back_url = request.original_url
   end
 
   def new

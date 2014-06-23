@@ -166,21 +166,59 @@ describe "lesson pages" do
 
     describe 'check redirect' do
       describe 'with admin user' do
-        before do
-          valid_sign_in admin, no_capybara: true
-          delete course_lesson_path(course, lesson)
+        describe 'remove single lesson' do
+          before do
+            valid_sign_in admin, no_capybara: true
+            delete course_lesson_path(course, lesson)
+          end
+
+          specify { expect(response).to redirect_to(course_lessons_path(course)) }
         end
 
-        specify { expect(response).to redirect_to(course_lessons_path(course)) }
+        describe 'remove all lessons' do
+          let(:another_course) { Course.create(name: 'Another test course') }
+          let(:lessons_count) { 20 }
+
+          before do
+            lessons_count.times do
+              FactoryGirl.create(:lesson, course: another_course)
+            end
+
+            valid_sign_in admin
+            visit course_lessons_path(another_course)
+          end
+
+          it { another_course.lessons.count.should eql lessons_count }
+          it { should have_link('Удалить все уроки', href: course_lessons_path(another_course)) }
+
+          describe 'delete courses' do
+            it "should be able to delete lessons" do
+              expect do
+                click_link 'Удалить все уроки'
+              end.to change(Lesson, :count).by(-another_course.lessons.count)
+            end
+          end
+        end
       end
 
       describe 'with simple user' do
-        before do
-          valid_sign_in user, no_capybara: true
-          delete course_lesson_path(course, lesson)
+        describe 'remove single course' do
+          before do
+            valid_sign_in user, no_capybara: true
+            delete course_lesson_path(course, lesson)
+          end
+
+          specify { expect(response).to redirect_to(root_path) }
         end
 
-        specify { expect(response).to redirect_to(root_path) }
+        describe 'remove all lessons' do
+          before do
+            valid_sign_in user, no_capybara: true
+            delete course_lessons_path(course)
+          end
+
+          specify { expect(response).to redirect_to(root_path) }
+        end
       end
     end
   end

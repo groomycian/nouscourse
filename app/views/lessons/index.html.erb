@@ -8,6 +8,9 @@
     <%= link_to new_course_lesson_path(@course), title: 'Добавить урок', class: 'btn btn-default btn-sm' do %>
         <i class="glyphicon glyphicon-plus"></i>
     <% end %>
+    <%= link_to course_lessons_path, method: :delete, title: 'Удалить все уроки', class: 'btn btn-default btn-sm', data: { confirm: "You sure?" }  do %>
+        <i class="glyphicon glyphicon-trash"></i>
+    <% end %>
   </div>
 </div>
 <div class="row">

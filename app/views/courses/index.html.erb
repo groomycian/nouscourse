@@ -6,6 +6,9 @@
     <%= link_to new_course_path, title: 'Добавить курс', class: 'btn btn-default btn-sm' do %>
         <i class="glyphicon glyphicon-plus"></i>
     <% end %>
+    <%= link_to courses_path, method: :delete, title: 'Удалить все курсы', class: 'btn btn-default btn-sm', data: { confirm: "You sure?" }  do %>
+        <i class="glyphicon glyphicon-trash"></i>
+    <% end %>
   </div>
 </div>
 <div class="row">

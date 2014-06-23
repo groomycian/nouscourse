@@ -170,21 +170,71 @@ describe "Courses pages" do
 
     describe 'check redirect' do
       describe 'with admin user' do
-        before do
-          valid_sign_in admin, no_capybara: true
-          delete course_path(course)
+        describe 'remove single course' do
+          before do
+            valid_sign_in admin, no_capybara: true
+            delete course_path(course)
+          end
+
+          specify { expect(response).to redirect_to(courses_path) }
         end
 
-        specify { expect(response).to redirect_to(courses_path) }
+        describe 'remove all courses' do
+          let!(:courses) { [FactoryGirl.create(:course), FactoryGirl.create(:course), FactoryGirl.create(:course)] }
+          let(:courses_count) { 3 }
+          let(:lessons_per_count) { 5 }
+          let(:lessons_count) { courses_count * lessons_per_count }
+
+          before do
+            lessons_per_count.times do
+              courses.each do | course |
+                FactoryGirl.create(:lesson, course: course)
+              end
+            end
+
+            valid_sign_in admin
+            visit courses_path
+          end
+
+          it { Lesson.count.should eql lessons_count }
+          it { should have_link('Удалить все курсы', href: courses_path) }
+
+          describe 'delete courses' do
+            it "should be able to delete courses" do
+              expect do
+                click_link 'Удалить все курсы'
+              end.to change(Course, :count).by(-Course.count)
+            end
+          end
+
+          describe 'delete lessons' do
+            it "should be able to delete lessons" do
+              expect do
+                click_link 'Удалить все курсы'
+              end.to change(Lesson, :count).by(-Lesson.count)
+            end
+          end
+        end
       end
 
       describe 'with simple user' do
-        before do
-          valid_sign_in user, no_capybara: true
-          delete course_path(course)
+        describe 'remove single course' do
+          before do
+            valid_sign_in user, no_capybara: true
+            delete course_path(course)
+          end
+
+          specify { expect(response).to redirect_to(root_path) }
         end
 
-        specify { expect(response).to redirect_to(root_path) }
+        describe 'remove all couerses' do
+          before do
+            valid_sign_in user, no_capybara: true
+            delete courses_path
+          end
+
+          specify { expect(response).to redirect_to(root_path) }
+        end
       end
     end
   end

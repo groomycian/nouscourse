@@ -1,6 +1,6 @@
 class LessonsController < ApplicationController
-  before_action :signed_in_user, only: [:index, :create, :new, :edit, :update, :destroy]
-  before_action :admin_user, only: [:index, :create, :new, :edit, :update, :destroy]
+  before_action :signed_in_user, only: [:index, :create, :new, :edit, :update, :destroy, :destroy_all]
+  before_action :admin_user, only: [:index, :create, :new, :edit, :update, :destroy, :destroy_all]
   before_action :load_course
 
   def index
@@ -41,6 +41,13 @@ class LessonsController < ApplicationController
     lesson = @course.find_lesson_by_id(params[:id])
     flash[:success] = "Выбранный урок был удалён"
     lesson.destroy
+
+    redirect_to course_lessons_path(@course)
+  end
+
+  def destroy_all
+    flash[:success] = "Уроки были удалены"
+    @course.lessons.destroy_all
 
     redirect_to course_lessons_path(@course)
   end

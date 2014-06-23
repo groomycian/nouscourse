@@ -1,6 +1,6 @@
 class CoursesController < ApplicationController
-  before_action :signed_in_user, only: [:index, :create, :new, :edit, :update, :destroy]
-  before_action :admin_user, only: [:index, :create, :new, :edit, :update, :destroy]
+  before_action :signed_in_user, only: [:index, :create, :new, :edit, :update, :destroy, :destroy_all]
+  before_action :admin_user, only: [:index, :create, :new, :edit, :update, :destroy, :destroy_all]
 
   def index
     @courses = Course.paginate(page: params[:page])
@@ -40,6 +40,13 @@ class CoursesController < ApplicationController
     course = Course.find(params[:id])
     flash[:success] = "Выбранный курс был удалён"
     course.destroy
+
+    redirect_to courses_path
+  end
+
+  def destroy_all
+    flash[:success] = "Курсы были удалены"
+    Course.destroy_all
 
     redirect_to courses_path
   end

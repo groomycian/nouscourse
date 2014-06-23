@@ -63,7 +63,7 @@ describe "Courses pages" do
 
         describe 'with wrong info' do
           it "should not create a course" do
-            expect { click_button submit }.not_to change(User, :count)
+            expect { click_button submit }.not_to change(Course, :count)
           end
 
           describe 'after form submission' do
@@ -100,7 +100,7 @@ describe "Courses pages" do
 
     it_should_behave_like 'check_access_to_page', 'Редактировать курс'
 
-    describe 'edit user' do
+    describe 'edit course' do
       let (:submit) { "Редактировать курс" }
 
       before do

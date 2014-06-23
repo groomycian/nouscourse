@@ -17,6 +17,37 @@ describe "lesson pages" do
     let(:target_path) { edit_course_lesson_path(course, lesson) }
 
     it_should_behave_like 'check_access_to_page', 'Редактировать урок'
+
+    describe 'edit course' do
+      let (:submit) { "Редактировать урок" }
+
+      before do
+        valid_sign_in admin
+        visit target_path
+      end
+
+      it { should have_title('Редактировать урок') }
+      it { should have_content('Редактировать урок') }
+      it { should have_button('Редактировать урок') }
+
+      describe 'with wrong info' do
+        before do
+          fill_in "Name", with: ''
+          fill_in "Description", with: ''
+        end
+
+        it "should not create a lesson" do
+          expect { click_button submit }.not_to change(Lesson, :count)
+        end
+
+        describe 'after form submission' do
+          before { click_button submit }
+
+          it { should have_title('Редактировать урок') }
+          it { should have_error_message('Форма содержит') }
+        end
+      end
+    end
   end
 
   describe 'check new page' do
@@ -39,8 +70,13 @@ describe "lesson pages" do
         let(:submit) { "Создать новый урок" }
 
         describe 'with wrong info' do
+          before do
+            fill_in "Name", with: ''
+            fill_in "Description", with: ''
+          end
+
           it "should not create a lesson" do
-            expect { click_button submit }.not_to change(User, :count)
+            expect { click_button submit }.not_to change(Lesson, :count)
           end
 
           describe 'after form submission' do
@@ -106,6 +142,45 @@ describe "lesson pages" do
             should have_link('', href: course_lesson_path(course, lesson))
           end
         end
+      end
+    end
+  end
+
+  describe 'destroy request' do
+    let!(:lesson) { FactoryGirl.create(:lesson, course: course) }
+
+    describe 'from the list page' do
+      describe 'with admin user' do
+        before do
+          valid_sign_in admin
+          visit course_lessons_path(course)
+        end
+
+        it "should be able to delete lesson" do
+          expect do
+            first('ul.list-items a[data-method="delete"]').click
+          end.to change(Lesson, :count).by(-1)
+        end
+      end
+    end
+
+    describe 'check redirect' do
+      describe 'with admin user' do
+        before do
+          valid_sign_in admin, no_capybara: true
+          delete course_lesson_path(course, lesson)
+        end
+
+        specify { expect(response).to redirect_to(course_lessons_path(course)) }
+      end
+
+      describe 'with simple user' do
+        before do
+          valid_sign_in user, no_capybara: true
+          delete course_lesson_path(course, lesson)
+        end
+
+        specify { expect(response).to redirect_to(root_path) }
       end
     end
   end

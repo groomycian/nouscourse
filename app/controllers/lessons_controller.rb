@@ -28,9 +28,21 @@ class LessonsController < ApplicationController
   end
 
   def update
+    @lesson = @course.find_lesson_by_id(params[:id])
+    if @lesson.update_attributes(lesson_params)
+      flash[:success] = "Урок был изменён"
+      redirect_to course_lessons_path(@course)
+    else
+      render 'edit'
+    end
   end
 
   def destroy
+    lesson = @course.find_lesson_by_id(params[:id])
+    flash[:success] = "Выбранный урок был удалён"
+    lesson.destroy
+
+    redirect_to course_lessons_path(@course)
   end
 
   private

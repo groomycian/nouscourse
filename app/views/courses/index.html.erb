@@ -2,9 +2,11 @@
 <h1>Все курсы</h1>
 
 <div class="row">
-    <div class="pull-left">
-        <%= link_to "Добавить курс", new_course_path %>
-    </div>
+  <div class="btn-group pull-left">
+    <%= link_to new_course_path, title: 'Добавить курс', class: 'btn btn-default btn-sm' do %>
+        <i class="glyphicon glyphicon-plus"></i>
+    <% end %>
+  </div>
 </div>
 <div class="row">
     <%= will_paginate %>

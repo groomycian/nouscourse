@@ -35,4 +35,7 @@ Nouscourse::Application.configure do
   config.active_support.deprecation = :stderr
 
   Rails.application.routes.default_url_options[:host] = 'localhost:3000'
+
+  # Access to rack session
+  config.middleware.use RackSessionAccess::Middleware
 end

@@ -58,6 +58,8 @@ group :test do
   gem 'cucumber-rails', '~> 1.4.0', :require => false
   gem 'database_cleaner', github: 'bmabey/database_cleaner'
   gem 'libnotify', '~> 0.8.0'
+  gem 'nokogiri', '~> 1.3'
+  gem 'rack_session_access'
   #datapopulation
 end
 

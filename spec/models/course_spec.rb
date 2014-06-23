@@ -6,6 +6,8 @@ describe Course do
   subject { course }
 
   it { should respond_to(:name) }
+  it { should respond_to(:lessons) }
+  it { should respond_to(:find_lesson_by_id) }
 
   describe "when name is not present" do
     before { course.name = " " }

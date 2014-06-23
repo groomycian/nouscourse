@@ -127,19 +127,31 @@ describe "lesson pages" do
       describe "pagination" do
 
         before do
-          31.times { FactoryGirl.create(:lesson, course: course) }
+          31.times do
+            FactoryGirl.create(:lesson, course: course)
+          end
+
+          course.lessons.each_with_index do |lesson, i|
+            5.times { FactoryGirl.create(:timetable, lesson: lesson, date: Date.today + i) }
+          end
+
           visit target_path
         end
 
         after  { Lesson.delete_all }
 
         it { should have_selector('div.pagination') }
+        it { Timetable.count.should eql Lesson.count * 5 }
 
         it "should list each course" do
-          Lesson.paginate(page: 1).each do |lesson|
+          course.lessons.paginate(page: 1).each do |lesson|
             expect(page).to have_selector('li', text: lesson.name)
             should have_link('', href: edit_course_lesson_path(course, lesson))
             should have_link('', href: course_lesson_path(course, lesson))
+
+            lesson.timetables.each do |timetable|
+              should have_selector("ul#timetables-#{lesson.id} span", text: I18n.l(timetable.date, :format => :default).strip)
+            end
           end
         end
       end

@@ -11,6 +11,7 @@ describe Timetable do
   it { should respond_to(:lesson_id) }
   it { should respond_to(:date) }
   it { should respond_to(:lesson) }
+  it { should respond_to(:print_date) }
 
   describe "when date is missing" do
     before { timetable.date = ''}

@@ -11,4 +11,8 @@ class Timetable < ActiveRecord::Base
 
     composed_scope
   end
+
+  def print_date
+    date.strftime("%e %b %Y %H:%M:%S%p")
+  end
 end

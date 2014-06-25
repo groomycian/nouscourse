@@ -1,0 +1,8 @@
+<%if lesson.timetables.count > 0%>
+    <div id="collapse-lesson-<%=lesson.id%>" class="panel-collapse collapse out">
+      <div class="panel-body">
+        <h4>Даты урока</h4>
+        <%=render 'shared/timetables/timetables', lesson: lesson%>
+      </div>
+    </div>
+<%end%>

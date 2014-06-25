@@ -1,0 +1,15 @@
+if($('#new-timetable-modal').length) {
+    $("#new-timetable-modal .modal-body").html("<%= escape_javascript(render 'shared/timetables/timetable_form', timetable: @timetable)%>")
+} else {
+    $("body").append("<%= escape_javascript(render('shared/timetables/timetable_popup', timetable: @timetable)) %>")
+}
+
+$('#new-timetable-modal').modal('show')
+
+$("[data-behaviour~='datepicker']").datepicker({
+    format: "dd-mm-yyyy",
+    weekStart: 1,
+    autoclose: true
+}).on('show', function(e){
+    $('.datepicker').css('z-index', 9999)
+});

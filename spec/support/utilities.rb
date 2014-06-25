@@ -67,7 +67,7 @@ shared_examples_for 'check_all_lessons_pagination' do |pagination_page|
   it "should list each lesson" do
     Timetable.comming(nil).paginate(page: pagination_page).each do |timetable|
       expect(page).to have_selector('li', text: timetable.lesson.name)
-      expect(page).to have_selector('li span', text: timetable.date)
+      expect(page).to have_selector('li span', text: I18n.l(timetable.date, :format => :default).strip)
     end
   end
 end
@@ -119,7 +119,7 @@ shared_examples_for 'check_course_pagination' do
     Timetable.comming(course).paginate(page: 1).each do |timetable|
       expect(timetable.lesson.course_id).to eql course.id
       expect(page).to have_selector('li', text: timetable.lesson.name)
-      expect(page).to have_selector('li span', text: timetable.date)
+      expect(page).to have_selector('li span', text: I18n.l(timetable.date, :format => :default).strip)
     end
   end
 end

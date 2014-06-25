@@ -1,0 +1,5 @@
+$('#new-timetable-modal').modal('hide')
+$("#timetables-<%=@timetable.lesson.id%>").replaceWith("<%= escape_javascript(render('shared/timetables/timetables', lesson: @lesson)) %>")
+
+$('#page-body').prepend('<div class="message-popup alert alert-success alert-dismissable">Время урока было добавлено</div>');
+setTimeout(function() { $('.message-popup').remove(); }, 5000);

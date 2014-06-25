@@ -1,0 +1,5 @@
+<ul id="timetables-<%=lesson.id%>" class="list-items">
+  <%lesson.timetables.each do |timetable| %>
+      <%=render timetable, should_show_admin_panel: true%>
+  <%end%>
+</ul>

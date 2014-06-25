@@ -1,0 +1,4 @@
+$("#timetable-item-<%=@timetable.id%>").remove()
+
+$('#page-body').prepend('<div class="message-popup alert alert-success alert-dismissable">Время урока было удалено</div>');
+setTimeout(function() { $('.message-popup').remove(); }, 5000);

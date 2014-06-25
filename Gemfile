@@ -42,6 +42,12 @@ gem 'faker', '~> 1.1.2'
 
 gem 'heroku_san'
 
+#custom dialog confirmation
+gem 'data-confirm-modal', github: 'ifad/data-confirm-modal'
+
+#datepicker
+gem 'bootstrap-datepicker-rails'
+
 group :development do
   gem 'guard-rspec', '2.5.0'
   gem 'rspec-rails', '2.13.1'

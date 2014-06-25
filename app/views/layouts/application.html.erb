@@ -13,7 +13,7 @@
 <section id="spinner" class="spinner-2">
   <div class="spinner"></div>
 </section>
-<div class="container">
+<div id="page-body" class="container">
   <% flash.each do |key, value| %>
       <%= content_tag(:div, value, class: "alert alert-#{key}") %>
   <% end %>

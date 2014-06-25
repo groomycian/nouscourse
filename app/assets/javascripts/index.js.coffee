@@ -11,6 +11,11 @@ page_load = ->
   $('#spinner').hide()
   $('.container').css({opacity: 1, pointerEvents: 'yes'})
 
+#handle ajax calls
+$(document).ajaxStart(page_load);
+$(document).ajaxStop(page_load);
+
+#handle turbolinks call
 $(document).ready(page_load);
 $(document).on('page:load', page_load);
 $(document).on('page:restore', page_load);

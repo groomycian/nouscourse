@@ -1,3 +1,11 @@
-<li>
+<li id="timetable-item-<%=timetable.id%>">
     <span><%= l timetable.date, :format => :default %></span>
+    <% if (signed_in? && current_user.admin && defined?(should_show_admin_panel) && should_show_admin_panel ) %>
+        <div class="btn-group pull-right" style="padding-bottom: 10px">
+            <%= link_to timetable, title: 'Удалить время урока', class: 'timetable-delete btn btn-default btn-sm', method: :delete,
+                        data:{ confirm: 'Удалить время урока', remote: true } do %>
+                <i class="glyphicon glyphicon-trash"></i>
+            <% end %>
+        </div>
+    <%end%>
 </li>

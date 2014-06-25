@@ -7,6 +7,7 @@ Nouscourse::Application.routes.draw do
   match 'course/:course_name', to: 'index#index', as: :course_name, :constraints => { :course_name => /[^\/]+/ },  via: [:get]
 
   resources :users
+
   resources :courses, only: [:index, :new, :edit, :update, :create, :destroy, :destroy_all]
   resources :courses do
     delete '', on: :collection, action: 'destroy_all'
@@ -14,6 +15,12 @@ Nouscourse::Application.routes.draw do
       delete '', on: :collection, action: 'destroy_all'
     end
   end
+
+  resources :lessons do
+    resources :timetables, only: [:new, :create]
+  end
+
+  resources :timetables, only: [:destroy]
 
   resources :sessions, only: [:new, :create, :destroy]
   # The priority is based upon order of creation: first created -> highest priority.

@@ -1,13 +1,22 @@
-<%= form_for [@course, @lesson] do |f|%>
+<%= form_for [@course, @lesson], html: { class: "form-horizontal center", role: "form" } do |f|%>
 
     <%= render 'shared/error_messages', object: f.object %>
 
-    <%=f.label :name%>
-    <%=f.text_field :name%>
-
-    <%=f.label :description%>
-    <%=f.text_area :description%>
-
-    <%= f.submit @lesson.id.blank? ? "Создать новый урок" : "Редактировать урок", class: "btn btn-large btn-primary" %>
-
+    <div class="form-group">
+        <%=f.label :name, class: "col-sm-2 control-label"%>
+        <div class="col-sm-10">
+            <%=f.text_field :name, class: "form-control"%>
+        </div>
+    </div>
+    <div class="form-group">
+        <%=f.label :description, class: "col-sm-2 control-label"%>
+        <div class="col-sm-10">
+            <%=f.text_area :description, class: "form-control"%>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <%= f.submit @lesson.id.blank? ? "Создать новый урок" : "Редактировать урок", class: "btn btn-large btn-primary" %>
+        </div>
+    </div>
 <% end %>

@@ -4,12 +4,12 @@
 
 page_ready = ->
   $('#spinner').show()
-  $('.container').css({opacity: 0.5, pointerEvents: 'none'})
+  $('body').css({opacity: 0.5})
 
 page_load = ->
   $('#body [title]').tooltip({});
   $('#spinner').hide()
-  $('.container').css({opacity: 1, pointerEvents: 'yes'})
+  $('body').css({opacity: 1})
 
 #handle ajax calls
 $(document).ajaxStart(page_load);

@@ -1,4 +1,6 @@
 class Lesson < ActiveRecord::Base
+  has_many :attachments, dependent: :destroy
+
   belongs_to :course
   has_many :timetables, dependent: :destroy
 

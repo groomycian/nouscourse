@@ -4,5 +4,5 @@ class Attachment < ActiveRecord::Base
   belongs_to :lesson
 
   validates :file, attachment_presence: true
-  validates_with AttachmentPresenceValidator, attributes: :file
+  do_not_validate_attachment_file_type :file
 end

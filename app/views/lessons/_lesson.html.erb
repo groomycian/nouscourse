@@ -19,6 +19,9 @@
                     <%= link_to new_lesson_timetable_path(lesson), title: 'Добавить время урока', class: 'btn btn-default btn-sm', data: { remote: true } do %>
                         <i class="glyphicon glyphicon-plus"></i>
                     <% end %>
+                    <%= link_to new_lesson_attachment_path(lesson), title: 'Загрузить файл', class: 'btn btn-default btn-sm', data: { remote: true } do %>
+                        <i class="glyphicon glyphicon-upload"></i>
+                    <% end %>
                   </div>
               <%end%>
             </div>

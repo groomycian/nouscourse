@@ -14,15 +14,28 @@ class AttachmentsController < ApplicationController
     @lesson = Lesson.find(params[:lesson_id])
     @attachment = @lesson.attachments.build(attachment_params)
 
-    if @attachment.save
-      responds_to_parent do
-        render 'create', :layout => false
-      end
-    else
-      responds_to_parent do
-        render 'new', :layout => false
+    respond_to do |format|
+      if @attachment.save
+        format.html {
+          render :json => [@attachment.to_jq_upload].to_json,
+                 :content_type => 'text/html',
+                 :layout => false
+        }
+        format.json { render json: {files: [@attachment.to_jq_upload]}, status: :created, location: @attachment }
+      else
+        format.html { render action: "new" }
+        format.json { render json: @attachment.errors, status: :unprocessable_entity }
       end
     end
+    # if @attachment.save
+    #   responds_to_parent do
+    #     render 'create', :layout => false
+    #   end
+    # else
+    #   responds_to_parent do
+    #     render 'new', :layout => false
+    #   end
+    # end
   end
 
   def destroy

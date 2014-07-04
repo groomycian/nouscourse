@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery-fileupload/basic
 //= require bootstrap
 //= require turbolinks
 //= require data-confirm-modal

@@ -1,4 +1,7 @@
 $('#new-attachment-modal').modal('hide')
 
+$("#collapsed-lesson-<%=@attachment.lesson.id%>").html("<%= escape_javascript(render('shared/lessons/lesson_collapsed_part', lesson: @lesson)) %>")
+$("#collapse-lesson-<%=@attachment.lesson.id%>").collapse('show')
+
 $('#page-body').prepend('<div class="message-popup alert alert-success alert-dismissable">Файл был добавлен</div>');
 setTimeout(function() { $('.message-popup').remove(); }, 5000);

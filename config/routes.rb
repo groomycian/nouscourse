@@ -22,6 +22,7 @@ Nouscourse::Application.routes.draw do
   end
 
   resources :timetables, only: [:destroy]
+  resources :attachments, only: [:destroy]
 
   resources :sessions, only: [:new, :create, :destroy]
   # The priority is based upon order of creation: first created -> highest priority.

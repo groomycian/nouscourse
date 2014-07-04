@@ -1,7 +1,25 @@
 <li>
 	<%if defined? timetable %>
-      <%= lesson.name %>
-      <span class="badge pull-right"><%=l timetable.date, :format => :default %></span>
+      <div class="panel-group" id="accordion-lesson-<%=lesson.id%>">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <div class="panel-title">
+              <%= link_to lesson.name, "#collapse-lesson-#{lesson.id}-#{timetable.id}", :'data-toggle' => "collapse", :'data-parent' => "#accordion" %>
+              <span class="badge pull-right"><%=l timetable.date, :format => :default %></span>
+            </div>
+          </div>
+          <%if lesson.attachments.count > 0%>
+          <div id="collapse-lesson-<%=lesson.id%>-<%=timetable.id%>" class="panel-collapse collapse out">
+            <div class="panel-body">
+              <div id="lesson-attachments-<%=lesson.id%>-<%=timetable.id%>">
+                <h4>Прикрепленные файлы</h4>
+                <%=render 'shared/attachments/attachments', lesson: lesson, timetable: timetable, should_show_admin_panel: false%>
+              </div>
+            </div>
+          </div>
+          <%end%>
+        </div>
+      </div>
     <%else%>
       <div class="panel-group" id="accordion-lesson-<%=lesson.id%>">
         <div class="panel panel-default">
@@ -26,7 +44,9 @@
               <%end%>
             </div>
           </div>
-          <%=render 'shared/lessons/lesson_collapsed_part', lesson: lesson%>
+          <div id="collapsed-lesson-<%=lesson.id%>">
+            <%=render 'shared/lessons/lesson_collapsed_part', lesson: lesson%>
+          </div>
         </div>
       </div>
     <%end%>

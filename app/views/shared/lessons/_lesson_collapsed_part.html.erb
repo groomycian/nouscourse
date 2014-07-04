@@ -1,8 +1,18 @@
-<%if lesson.timetables.count > 0%>
+<%if lesson.timetables.count > 0 || lesson.attachments.count > 0%>
     <div id="collapse-lesson-<%=lesson.id%>" class="panel-collapse collapse out">
       <div class="panel-body">
-        <h4>Даты урока</h4>
-        <%=render 'shared/timetables/timetables', lesson: lesson%>
+        <%if lesson.attachments.count > 0%>
+        <div id="lesson-attachments-<%=lesson.id%>">
+          <h4>Прикрепленные файлы</h4>
+          <%=render 'shared/attachments/attachments', lesson: lesson%>
+        </div>
+        <%end%>
+        <%if lesson.timetables.count > 0%>
+        <div id="lesson-timetables-<%=lesson.id%>">
+          <h4>Даты урока</h4>
+          <%=render 'shared/timetables/timetables', lesson: lesson%>
+        </div>
+        <%end%>
       </div>
     </div>
 <%end%>

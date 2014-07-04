@@ -20,7 +20,7 @@
             url: $(this).closest('form').attr('action'),
             dataType: 'json',
             done: function (e, data) {
-               <%=render 'shared/attachments/upload_done', attachment: attachment%>
+                $.getScript(data.result.update_path);
             },
             progressall: function (e, data) {
                 var progress = parseInt(data.loaded / data.total * 100, 10);

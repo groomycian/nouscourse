@@ -8,9 +8,6 @@ class Attachment < ActiveRecord::Base
 
   def to_jq_upload
     {
-      "attachment_id" => id,
-      "lesson_id" => lesson.id,
-      "name" => read_attribute(:file_file_name),
       "size" => read_attribute(:file_file_size),
       "url" => file.url(:original),
       "delete_url" => "",

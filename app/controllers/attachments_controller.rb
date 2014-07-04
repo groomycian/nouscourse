@@ -21,21 +21,17 @@ class AttachmentsController < ApplicationController
                  :content_type => 'text/html',
                  :layout => false
         }
-        format.json { render json: {files: [@attachment.to_jq_upload]}, status: :created, location: @attachment }
+        format.json { render json: {files: [@attachment.to_jq_upload], update_path: lesson_attachment_show_lesson_details_path(@lesson, @attachment)}, status: :created, location: @attachment }
       else
         format.html { render action: "new" }
         format.json { render json: @attachment.errors, status: :unprocessable_entity }
       end
     end
-    # if @attachment.save
-    #   responds_to_parent do
-    #     render 'create', :layout => false
-    #   end
-    # else
-    #   responds_to_parent do
-    #     render 'new', :layout => false
-    #   end
-    # end
+  end
+
+  def show_lesson_details
+    @attachment = Attachment.find(params[:attachment_id])
+    render layout: false
   end
 
   def destroy

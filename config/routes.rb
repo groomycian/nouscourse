@@ -18,7 +18,9 @@ Nouscourse::Application.routes.draw do
 
   resources :lessons do
     resources :timetables, only: [:new, :create]
-    resources :attachments, only: [:new, :create]
+    resources :attachments, only: [:new, :create] do
+      get :show_lesson_details
+    end
   end
 
   resources :timetables, only: [:destroy]

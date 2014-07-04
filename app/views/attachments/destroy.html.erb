@@ -1,0 +1,4 @@
+$("#attachment-item-<%=@attachment.id%>").remove()
+
+$('#page-body').prepend('<div class="message-popup alert alert-success alert-dismissable">Файл был удалён</div>');
+setTimeout(function() { $('.message-popup').remove(); }, 5000);

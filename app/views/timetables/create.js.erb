@@ -1,10 +1,7 @@
 $('#new-timetable-modal').modal('hide')
 
-if(!$("#timetables-<%=@timetable.lesson.id%>").length) {
-    $("#accordion-lesson-<%=@timetable.lesson.id%>").append("<%= escape_javascript(render('shared/lessons/lesson_collapsed_part', lesson: @lesson)) %>")
-} else {
-    $("#timetables-<%=@timetable.lesson.id%>").replaceWith("<%= escape_javascript(render('shared/timetables/timetables', lesson: @lesson)) %>")
-}
+$("#collapsed-lesson-<%=@timetable.lesson.id%>").html("<%= escape_javascript(render('shared/lessons/lesson_collapsed_part', lesson: @lesson)) %>")
+$("#collapse-lesson-<%=@timetable.lesson.id%>").collapse('show')
 
 $('#page-body').prepend('<div class="message-popup alert alert-success alert-dismissable">Время урока было добавлено</div>');
 setTimeout(function() { $('.message-popup').remove(); }, 5000);

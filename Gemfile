@@ -48,6 +48,15 @@ gem 'data-confirm-modal', github: 'ifad/data-confirm-modal'
 #datepicker
 gem 'bootstrap-datepicker-rails'
 
+#file attachments
+gem "paperclip", "~> 4.1"
+
+#respond to parent page (not to iframe)
+gem 'responds_to_parent', '~> 1.1.0'
+
+#upload progress bar
+gem "jquery-fileupload-rails"
+
 group :development do
   gem 'guard-rspec', '2.5.0'
   gem 'rspec-rails', '2.13.1'

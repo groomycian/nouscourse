@@ -1,0 +1,32 @@
+<%= form_for [attachment.lesson, attachment], html: {multipart: true,  class: "form-horizontal center", role: "form" } do |f|%>
+    <%= render 'shared/error_messages', object: f.object %>
+
+    <div class="form-group">
+        <%=f.label :file, class: "col-sm-2 control-label" %>
+        <div class="col-sm-10">
+            <%= f.file_field :file, class: "form-control attachment-upload" %>
+        </div>
+    </div>
+    <!-- The global progress bar -->
+    <div class="progress">
+      <div class="progress-bar" role="progressbar"></div>
+    </div>
+<% end %>
+<script>
+    /*jslint unparam: true */
+    /*global window, $ */
+    $(function () {
+        $('.attachment-upload').fileupload({
+            url: $(this).closest('form').attr('action'),
+            dataType: 'json',
+            done: function (e, data) {
+               <%=render 'shared/attachments/upload_done', attachment: attachment%>
+            },
+            progressall: function (e, data) {
+                var progress = parseInt(data.loaded / data.total * 100, 10);
+                var progressBar = $(this).closest('form').find('.progress-bar');
+                progressBar.css('width', progress + '%');
+            }
+        });
+    });
+</script>

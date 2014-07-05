@@ -4,6 +4,8 @@ class Attachment < ActiveRecord::Base
   belongs_to :lesson
 
   validates :file, attachment_presence: true
+  validates_attachment_size :file, less_than: 25.megabytes
+
   do_not_validate_attachment_file_type :file
 
   def to_jq_upload

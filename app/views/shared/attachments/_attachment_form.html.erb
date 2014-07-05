@@ -19,6 +19,13 @@
         $('.attachment-upload').fileupload({
             url: $(this).closest('form').attr('action'),
             dataType: 'json',
+            fail: function (e, data) {
+                $('#new-attachment-modal').modal('hide')
+                $('#page-body')
+                        .prepend('<div class="message-popup alert alert-danger alert-dismissable">' + data.jqXHR.responseJSON.file[0] + '</div>')
+
+                setTimeout(function() { $('.message-popup').remove(); }, 5000);
+            },
             done: function (e, data) {
                 $.getScript(data.result.update_path);
             },

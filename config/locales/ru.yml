@@ -31,8 +31,32 @@ ru:
 
     month_names: [~, Январь, Февраль, Март, Апрель, Маи, Июнь, Июль, Август, Сентябрь, Октябрь, Ноябрь, Декабрь]
     abbr_month_names: [~, Янв, Фев, Мар, Апр, Маи, Июн, Июл, Авг, Сен, Окт, Ноя, Дек]
+
   time:
     formats:
       default: "%d-%m-%Y %H:%M:%S"
       short: "%d %B %H:%M"
       long: "%B %d, %Y %H:%M"
+
+  number:
+    human:
+      storage_units:
+        format: "%n %u"
+        units:
+          byte:
+            one: "Byte"
+            other: "Bytes"
+          kb: "KB"
+          mb: "MB"
+          gb: "GB"
+          tb: "TB"
+
+  activerecord:
+    errors:
+      models:
+        attachment:
+          attributes:
+            file_file_size:
+              less_than: 'Неправильный размер файла'
+            file:
+              less_than: 'Неправильный размер файла'

@@ -3,6 +3,7 @@ class Attachment < ActiveRecord::Base
 
   belongs_to :lesson
 
+  validates :description, presence: true
   validates :file, attachment_presence: true
   do_not_validate_attachment_file_type :file
 

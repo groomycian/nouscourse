@@ -49,6 +49,6 @@ class AttachmentsController < ApplicationController
   end
 
   def attachment_params
-    params.fetch(:attachment, {}).permit(:file)
+    params.fetch(:attachment, {}).permit(:file, :description)
   end
 end

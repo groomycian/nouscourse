@@ -1,0 +1,7 @@
+    if($('#new-attachment-modal').length) {
+        $("#new-attachment-modal .modal-body").html("<%= escape_javascript(render 'shared/attachments/attachment_form', attachment: @attachment)%>");
+    } else {
+        $("body").append("<%= escape_javascript(render('shared/attachments/attachment_popup', attachment: @attachment)) %>");
+    }
+
+    $('#new-attachment-modal').modal('show');

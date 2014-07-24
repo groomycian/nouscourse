@@ -18,9 +18,13 @@ Nouscourse::Application.routes.draw do
 
   resources :lessons do
     resources :timetables, only: [:new, :create]
+    resources :attachments, only: [:new, :create] do
+      get :show_lesson_details
+    end
   end
 
   resources :timetables, only: [:destroy]
+  resources :attachments, only: [:destroy]
 
   resources :sessions, only: [:new, :create, :destroy]
   # The priority is based upon order of creation: first created -> highest priority.

@@ -1,0 +1,5 @@
+<ul id="attachments-<%=lesson.id%><%=(defined?(timetable)) ? '-' + timetable.id.to_s : ''%>" class="list-items">
+  <%lesson.attachments.each do |attachment| %>
+      <%=render attachment, should_show_admin_panel: defined?(should_show_admin_panel) ? should_show_admin_panel : true%>
+  <%end%>
+</ul>

@@ -3,6 +3,7 @@ class Attachment < ActiveRecord::Base
 
   belongs_to :lesson
 
+  validates :description, presence: true
   validates :file, attachment_presence: true
   validates_attachment_size :file, less_than: 25.megabytes
 

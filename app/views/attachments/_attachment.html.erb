@@ -1,5 +1,5 @@
 <li id="attachment-item-<%=attachment.id%>">
-    <%= link_to attachment.file_file_name, attachment.file.url%>
+    <%= link_to attachment.file_file_name, attachment.file.url, class: 'attachment-link', title: 'Описание файла', :'data-placement' => "top", :'data-toggle' => "popover", :'data-trigger' => 'hover', :'data-content' => attachment.description%>
     <% if (signed_in? && current_user.admin && defined?(should_show_admin_panel) && should_show_admin_panel ) %>
         <div class="btn-group pull-right" style="padding-bottom: 10px">
             <%= link_to attachment, title: 'Удалить файл', class: 'timetable-delete btn btn-default btn-sm', method: :delete,

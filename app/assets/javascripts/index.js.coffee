@@ -9,7 +9,8 @@ page_ready = ->
   $('body').css({opacity: 0.5})
 
 page_load = ->
-  $('#body [title]').tooltip({});
+  $('#body [title]').filter(':not([data-toggle="popover"])').tooltip({});
+  $('#body [data-toggle="popover"]').popover()
   $('#spinner').hide()
   $('body').css({opacity: 1})
 

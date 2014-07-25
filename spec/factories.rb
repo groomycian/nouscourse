@@ -24,4 +24,16 @@ FactoryGirl.define do
     sequence(:date) { |n| (Date.today - 2)  + n }
     lesson
   end
+
+  factory :attachment do
+    description "Amazing file"
+    file Rack::Test::UploadedFile.new('spec/data/files/test.jpg', 'image/jpg')
+    lesson
+  end
+
+  factory :another_attachment do
+    description "Another amazing file"
+    file Rack::Test::UploadedFile.new('spec/data/files/test.jpg', 'image/jpg')
+    lesson
+  end
 end

@@ -5,6 +5,8 @@ class Attachment < ActiveRecord::Base
 
   validates :description, presence: true
   validates :file, attachment_presence: true
+  validates :lesson_id, presence: true, :numericality => {:only_integer => true}
+
   validates_attachment_size :file, less_than: 25.megabytes
 
   do_not_validate_attachment_file_type :file

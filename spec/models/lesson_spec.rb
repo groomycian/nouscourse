@@ -11,6 +11,7 @@ describe Lesson do
   it { should respond_to(:description) }
   it { should respond_to(:course) }
   it { should respond_to(:timetables) }
+  it { should respond_to(:attachments) }
 
   its(:course) { should eq course }
 
@@ -29,5 +30,22 @@ describe Lesson do
   describe "when lesson course is empty" do
     before { lesson.course = nil }
     it { should_not be_valid }
+  end
+
+  describe "lesson attachments" do
+    let(:lesson) { FactoryGirl.create(:lesson, course: course) }
+    let(:attachment_feed){
+      [
+          FactoryGirl.create(:attachment, lesson: lesson),
+          FactoryGirl.create(:attachment, lesson: lesson),
+          FactoryGirl.create(:attachment, lesson: lesson)
+      ]
+    }
+
+    describe "feed" do
+      it 'should contain add attachments' do
+        lesson.attachments.should eq attachment_feed
+      end
+    end
   end
 end

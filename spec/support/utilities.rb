@@ -106,6 +106,7 @@ shared_examples_for 'check_course_pagination' do
 
     Lesson.all.each do |lesson|
       5.times {|i| FactoryGirl.create(:timetable, lesson: lesson) }
+      1.times {|i| FactoryGirl.create(:attachment, lesson: lesson) }
     end
 
     first(:link, course.name).click
@@ -115,11 +116,21 @@ shared_examples_for 'check_course_pagination' do
 
   it { should have_selector('div.pagination') }
 
-  it "should list each lesson" do
+  it "should list each timetable" do
     Timetable.comming(course).paginate(page: 1).each do |timetable|
       expect(timetable.lesson.course_id).to eql course.id
       expect(page).to have_selector('li', text: timetable.lesson.name)
       expect(page).to have_selector('li span', text: I18n.l(timetable.date, :format => :default).strip)
+    end
+  end
+
+  it "should list each attachment" do
+    Lesson.all.each do |lesson|
+      lesson.attachments.each do |attachment|
+        expect(page).to have_xpath(
+          "//a[@data-content='" + attachment.description + "' and contains(text(),'" + attachment.file_file_name + "')]"
+        )
+      end
     end
   end
 end
